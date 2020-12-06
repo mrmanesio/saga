@@ -10,10 +10,22 @@ class PostForm extends Component {
 
     submitHandler = event => {
         event.preventDefault();
+
+        const {title} = this.state
+
+        const newPost = {
+            title,
+            id: Date.now().toString()
+        }
+
+        console.log(newPost);
+        this.setState({title: ''})
     }
 
     changeInputHandler = event => {
-        
+        this.setState( prev => ({...prev, ...{
+            [event.target.name]: event.target.value
+        }}))
     }
 
     render() {
@@ -26,7 +38,8 @@ class PostForm extends Component {
                         className="form-control"
                         id="title"
                         value={this.state.title}
-                        onCahge={this.changeInputHandler}
+                        name="title"
+                        onChange={this.changeInputHandler}
                     />
                 </div>
                 <button className="btn btn-success" type="submit">Создать</button>
